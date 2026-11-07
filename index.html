@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOME 5</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ color:white;
+ background:linear-gradient(130deg,#07152e,#173b78,#07152e);
+ min-height:100vh;
+}
+header{
+ padding:30px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+.logo{font-size:30px;font-weight:bold}
+.profile{font-size:14px}
+h2{margin:25px 30px}
+.tabs{
+ display:flex;gap:12px;
+ padding:0 30px;
+ flex-wrap:wrap;
+}
+button{
+ background:#ffffff18;
+ color:white;
+ border:1px solid #ffffff40;
+ padding:13px 20px;
+ border-radius:10px;
+ font-size:15px;
+}
+button:focus,button:hover{
+ background:#3979ed;
+}
+.games{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+ gap:18px;padding:20px 30px;
+}
+.game{
+ background:#ffffff15;
+ border-radius:14px;
+ overflow:hidden;
+}
+.cover{
+ height:130px;
+ display:grid;
+ place-items:center;
+ background:linear-gradient(145deg,#263e75,#10182e);
+ font-size:38px;
+}
+.game p{padding:0 12px}
+footer{
+ padding:25px;text-align:center;
+ color:#aabde0;font-size:12px;
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">HOME 5</div>
+<div class="profile">👤 Usuario 1</div>
+</header>
+
+<h2>Bienvenido a HOME 5</h2>
+
+<div class="tabs">
+<button onclick="show('Todos')">Inicio</button>
+<button onclick="show('PS5')">PS5</button>
+<button onclick="show('PS4')">PS4</button>
+<button onclick="show('Xbox')">Xbox</button>
+<button onclick="show('Roblox')">Roblox</button>
+<button onclick="show('Favoritos')">⭐ Favoritos</button>
+</div>
+
+<h2 id="section">Explorar juegos</h2>
+<div class="games" id="games"></div>
+
+<footer>HOME 5 · Gaming Dashboard</footer>
+
+<script>
+const games=[
+{name:"Roblox",type:"Roblox",icon:"🟥"},
+{name:"Minecraft",type:"PS4",icon:"🌍"},
+{name:"Fortnite",type:"PS5",icon:"🎯"},
+{name:"GTA V",type:"PS3",icon:"🚗"},
+{name:"Rocket League",type:"PS4",icon:"⚽"},
+{name:"Halo",type:"Xbox",icon:"🟢"}
+];
+let favorites=[];
+function show(type){
+document.getElementById("section").textContent=
+type==="Todos"?"Explorar juegos":type;
+let list=type==="Todos"?games:
+type==="Favoritos"?games.filter(g=>favorites.includes(g.name)):
+games.filter(g=>g.type===type);
+document.getElementById("games").innerHTML=list.map(g=>
+`<div class="game">
+<div class="cover">${g.icon}</div>
+<p>${g.name}</p>
+<button onclick="fav('${g.name}')">⭐</button>
+</div>`).join("");
+}
+function fav(name){
+if(favorites.includes(name))favorites=favorites.filter(x=>x!==name);
+else favorites.push(name);
+show(document.getElementById("section").textContent==="Favoritos"?"Favoritos":"Todos");
+}
+show("Todos");
+</script>
+</body>
+</html>
