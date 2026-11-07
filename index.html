@@ -1,118 +1,178 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HOME 5</title>
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;
- font-family:Arial,sans-serif;
- color:white;
- background:linear-gradient(130deg,#07152e,#173b78,#07152e);
- min-height:100vh;
+ margin:0;color:white;font-family:Arial,sans-serif;
+ background:radial-gradient(ellipse at 75% 15%,#173c83 0%,transparent 40%),
+ linear-gradient(135deg,#071329,#080b19 65%,#101b39);
+ min-height:100vh
 }
 header{
- padding:30px;
- display:flex;
- justify-content:space-between;
- align-items:center;
+ height:75px;padding:0 5%;display:flex;align-items:center;
+ justify-content:space-between;border-bottom:1px solid #ffffff18;
+ background:#071329aa;backdrop-filter:blur(15px);
+ position:sticky;top:0;z-index:5
 }
-.logo{font-size:30px;font-weight:bold}
-.profile{font-size:14px}
-h2{margin:25px 30px}
-.tabs{
- display:flex;gap:12px;
- padding:0 30px;
- flex-wrap:wrap;
+.logo{font-size:27px;font-weight:900;letter-spacing:2px}
+.logo span{color:#55aaff}
+.profile{background:#ffffff18;padding:10px 16px;border-radius:25px}
+nav{display:flex;gap:12px;padding:22px 5%;overflow-x:auto}
+nav button,.action{
+ background:#ffffff12;border:1px solid #ffffff20;color:white;
+ border-radius:22px;padding:11px 19px;cursor:pointer;
+ white-space:nowrap
 }
-button{
- background:#ffffff18;
- color:white;
- border:1px solid #ffffff40;
- padding:13px 20px;
- border-radius:10px;
- font-size:15px;
+nav button.active,nav button:hover,.action:hover{background:#287ce5}
+main{padding:10px 5% 60px}
+.hero{
+ min-height:310px;border-radius:25px;padding:35px;
+ display:flex;flex-direction:column;justify-content:end;
+ background:linear-gradient(90deg,#071329 5%,#071329aa 55%,transparent),
+ linear-gradient(135deg,#1558a6,#10214e 60%,#050b1c);
+ border:1px solid #ffffff20;box-shadow:0 20px 60px #0005;
+ overflow:hidden;position:relative
 }
-button:focus,button:hover{
- background:#3979ed;
+.hero:after{
+ content:"H5";position:absolute;right:7%;top:5%;
+ font-size:190px;font-weight:900;color:#ffffff0a
 }
-.games{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
- gap:18px;padding:20px 30px;
+.eyebrow{color:#75baff;text-transform:uppercase;letter-spacing:3px}
+h1{font-size:clamp(35px,6vw,65px);margin:12px 0}
+.hero p{color:#c4d4ee;max-width:500px;line-height:1.6}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:35px 0 18px}
+.section-title h2{margin:0;font-size:23px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px}
+.card{
+ background:#ffffff0c;border:1px solid #ffffff18;border-radius:18px;
+ overflow:hidden;transition:.2s;cursor:pointer
 }
-.game{
- background:#ffffff15;
- border-radius:14px;
- overflow:hidden;
-}
+.card:hover{transform:translateY(-5px);border-color:#55aaff}
 .cover{
- height:130px;
- display:grid;
- place-items:center;
- background:linear-gradient(145deg,#263e75,#10182e);
- font-size:38px;
+ height:145px;display:flex;align-items:center;justify-content:center;
+ font-size:52px;font-weight:900;
+ background:linear-gradient(135deg,#174a83,#101a39)
 }
-.game p{padding:0 12px}
-footer{
- padding:25px;text-align:center;
- color:#aabde0;font-size:12px;
+.card:nth-child(2n) .cover{background:linear-gradient(135deg,#653b8b,#18264c)}
+.card:nth-child(3n) .cover{background:linear-gradient(135deg,#167b80,#122b4a)}
+.info{padding:15px}
+.info h3{margin:0 0 8px}
+.info p{font-size:12px;color:#9eacc5;margin:0 0 13px}
+.card-actions{display:flex;gap:8px;align-items:center}
+.small{font-size:12px;padding:8px 11px}
+footer{text-align:center;color:#71819e;padding:35px;font-size:12px}
+.notice{padding:14px;border-radius:12px;background:#ffffff0c;color:#b9cbe6;font-size:13px;line-height:1.6}
+.hidden{display:none}
+@media(max-width:600px){
+ header{height:65px}.logo{font-size:22px}
+ .hero{min-height:280px;padding:23px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+ .cover{height:115px;font-size:38px}
+ .info{padding:11px}.info h3{font-size:14px}
 }
 </style>
 </head>
 <body>
 <header>
-<div class="logo">HOME 5</div>
-<div class="profile">👤 Usuario 1</div>
+ <div class="logo">HOME <span>5</span></div>
+ <div class="profile">👤 Jugador</div>
 </header>
 
-<h2>Bienvenido a HOME 5</h2>
+<nav id="nav">
+ <button class="active" data-filter="all">Inicio</button>
+ <button data-filter="playstation">PlayStation</button>
+ <button data-filter="xbox">Xbox</button>
+ <button data-filter="roblox">Roblox</button>
+ <button data-filter="favorites">♥ Favoritos</button>
+</nav>
 
-<div class="tabs">
-<button onclick="show('Todos')">Inicio</button>
-<button onclick="show('PS5')">PS5</button>
-<button onclick="show('PS4')">PS4</button>
-<button onclick="show('Xbox')">Xbox</button>
-<button onclick="show('Roblox')">Roblox</button>
-<button onclick="show('Favoritos')">⭐ Favoritos</button>
-</div>
+<main>
+ <section class="hero">
+  <div class="eyebrow">Tu centro de videojuegos</div>
+  <h1>Bienvenido a HOME 5</h1>
+  <p>Tu biblioteca, tus juegos y tus plataformas. Todo en un solo lugar.</p>
+  <div><button class="action" onclick="showAll()">Explorar biblioteca →</button></div>
+ </section>
 
-<h2 id="section">Explorar juegos</h2>
-<div class="games" id="games"></div>
+ <div class="section-title">
+  <h2 id="heading">Tus juegos</h2>
+  <span style="color:#8daed8;font-size:12px">HOME 5</span>
+ </div>
+ <section class="grid" id="games"></section>
 
-<footer>HOME 5 · Gaming Dashboard</footer>
+ <div class="section-title"><h2>Servicios de juego</h2></div>
+ <section class="grid">
+  <article class="card">
+   <div class="cover">🎮</div>
+   <div class="info"><h3>PlayStation</h3>
+   <p>Acceso a servicios oficiales</p>
+   <button class="action small" onclick="openService('https://www.playstation.com/es-es/remote-play/')">Más información</button></div>
+  </article>
+  <article class="card">
+   <div class="cover">☁️</div>
+   <div class="info"><h3>Xbox Cloud</h3>
+   <p>Juego en la nube, sujeto a compatibilidad</p>
+   <button class="action small" onclick="openService('https://www.xbox.com/es-ES/play')">Abrir servicio</button></div>
+  </article>
+  <article class="card">
+   <div class="cover">🟦</div>
+   <div class="info"><h3>Roblox</h3>
+   <p>Acceso a la web oficial. No ejecuta Roblox dentro de PS3.</p>
+   <button class="action small" onclick="openService('https://www.roblox.com/')">Abrir Roblox</button></div>
+  </article>
+ </section>
+ <div class="section-title"><h2>Información</h2></div>
+ <div class="notice">
+ HOME 5 es una interfaz independiente. Los juegos de PS4, PS5 y Xbox no se ejecutan nativamente en PS3. Los servicios externos requieren dispositivos y compatibilidad adecuados.
+ </div>
+</main>
+<footer>HOME 5 · Proyecto independiente · No afiliado a Sony, Microsoft ni Roblox.</footer>
 
 <script>
 const games=[
-{name:"Roblox",type:"Roblox",icon:"🟥"},
-{name:"Minecraft",type:"PS4",icon:"🌍"},
-{name:"Fortnite",type:"PS5",icon:"🎯"},
-{name:"GTA V",type:"PS3",icon:"🚗"},
-{name:"Rocket League",type:"PS4",icon:"⚽"},
-{name:"Halo",type:"Xbox",icon:"🟢"}
+ {name:"GTA V",platform:"playstation",icon:"🚗",desc:"Acceso a tu biblioteca"},
+ {name:"Minecraft",platform:"playstation",icon:"⛏️",desc:"Construcción y aventura"},
+ {name:"Rocket League",platform:"playstation",icon:"⚽",desc:"Deportes y conducción"},
+ {name:"Halo",platform:"xbox",icon:"🪖",desc:"Universo Xbox"},
+ {name:"Forza",platform:"xbox",icon:"🏎️",desc:"Carreras"},
+ {name:"Roblox",platform:"roblox",icon:"🟦",desc:"Experiencias de Roblox"}
 ];
-let favorites=[];
-function show(type){
-document.getElementById("section").textContent=
-type==="Todos"?"Explorar juegos":type;
-let list=type==="Todos"?games:
-type==="Favoritos"?games.filter(g=>favorites.includes(g.name)):
-games.filter(g=>g.type===type);
-document.getElementById("games").innerHTML=list.map(g=>
-`<div class="game">
-<div class="cover">${g.icon}</div>
-<p>${g.name}</p>
-<button onclick="fav('${g.name}')">⭐</button>
-</div>`).join("");
+let favorites=JSON.parse(localStorage.getItem("home5-favs")||"[]");
+function render(filter="all"){
+ const list=filter==="favorites"?games.filter(g=>favorites.includes(g.name)):
+ filter==="all"?games:games.filter(g=>g.platform===filter);
+ document.getElementById("heading").textContent=
+ filter==="all"?"Tus juegos":filter==="favorites"?"Tus favoritos":filter[0].toUpperCase()+filter.slice(1);
+ document.getElementById("games").innerHTML=list.map(g=>`
+ <article class="card">
+ <div class="cover">${g.icon}</div>
+ <div class="info"><h3>${g.name}</h3><p>${g.desc}</p>
+ <div class="card-actions">
+ <button class="action small" onclick="launch('${g.name}')">Ver detalles</button>
+ <button class="action small" onclick="toggleFav('${g.name}')">${favorites.includes(g.name)?"♥":"♡"}</button>
+ </div></div></article>`).join("");
 }
-function fav(name){
-if(favorites.includes(name))favorites=favorites.filter(x=>x!==name);
-else favorites.push(name);
-show(document.getElementById("section").textContent==="Favoritos"?"Favoritos":"Todos");
+function toggleFav(name){
+ favorites=favorites.includes(name)?favorites.filter(x=>x!==name):[...favorites,name];
+ localStorage.setItem("home5-favs",JSON.stringify(favorites));
+ const active=document.querySelector("nav button.active");
+ render(active?.dataset.filter||"all");
 }
-show("Todos");
+function launch(name){alert(name+": esta tarjeta es parte de la biblioteca visual de HOME 5.")}
+function openService(url){window.open(url,"_blank","noopener")}
+function showAll(){document.querySelector('[data-filter="all"]').click()}
+document.querySelectorAll("nav button").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+ document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+ btn.classList.add("active");render(btn.dataset.filter);
+ });
+});
+render();
 </script>
 </body>
 </html>
